@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora</title>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+    const vaciar = () => {
+      document.getElementById("pantalla").value = "";
+    }
+    function validar(){
+      let num = document.getElementById("pantalla");
+      if(isNaN(num)){
+        document.getElementById("pantalla").innerHTML= "Error";
+        return false;
+      }else{
+        return true;
+      }
+    }
+    const cuadrado = () => {
+      if(validar()==true){
+      let num = document.getElementById("pantalla");
+      num.value = num.value * num.value;
+      rellenar_info(); 
+      }
+    }
+
+    function rellenar_info(){
+      if(validar()==true){
+      let num = document.getElementById("pantalla");
+      if (num.value< 100) {
+        document.getElementById("info").innerHTML= "Info: El resultado es menor que 100";
+      }else if(num.value< 200){
+        document.getElementById("info").innerHTML= "Info: El resultado está entre 100 y 200";
+      }else{
+        document.getElementById("info").innerHTML= "Info: El resultado es superior a 200";
+      }
+      }
+    }
+    function mod()  {
+      if(validar()==true){
+      let num = document.getElementById("pantalla");
+      num.value =  Math.abs(num.value);
+      rellenar_info();
+     }
+    }
+    function fact() {
+      if(validar()==true){
+      let num = document.getElementById("pantalla");
+	    var total = 1; 
+	    for (i=1; i<=num.value; i++) {
+		    total *= i; 
+	    }
+	    num.value = total; 
+      rellenar_info();
+    }
+    }
+    function add() {
+      let num1 = document.getElementById("pantalla");
+      
+      function eq() {
+      let num2 = document.getElementById("pantalla");
+      return num.value = num1.value + num2.value;
+      rellenar_info();
+      }
+
+    }
+    function mult() {
+      let num1 = document.getElementById("pantalla");
+
+      function eq() {
+      let num2 = document.getElementById("pantalla");
+      num.value = num1.value + num2.value;
+      rellenar_info();
+      }
+    }
+
+    function sumatorio() { 
+      if(validar()==true){
+      let num = document.getElementById("pantalla");
+
+      let list = num.value.split(",");
+
+      let i = 0, acc = 0;
+      while (i < list.length) acc += +list[i++];
+      
+      num.value = acc;
+      rellenar_info();
+      }
+    }
+
+    function ordenar() {
+      if(validar()==true){
+      let num = document.getElementById("pantalla");
+
+      let list = num.value.split(",");
+
+      list.sort (funcionDeComparacion);
+      function funcionDeComparacion (elem1, elem2) { return elem1 - elem2; }
+
+      num.value = list;
+     }
+    }
+
+    function revertir() {
+      if(validar()==true){
+      let num = document.getElementById("pantalla");
+
+      let list = num.value.split(",");
+
+      list.reverse();
+
+      num.value = list;
+      }
+    }
+
+    function quitar() {
+      if(validar()==true){
+      let num = document.getElementById("pantalla");
+
+      let list = num.value.split(",");
+
+      list.splice(length-1,1);
+
+      num.value = list;
+      }
+    }
+    
+  
+  </script>
+</head>
+<body>
+  <h1>Calculadora de CORE</h1>
+  Número:
+  <input type="text" id="pantalla" onclick="vaciar()">
+
+  <h2 id="info" class="grande" title="Info sobre el número">Info sobre el número</h2>
+
+  <h3>Operaciones unitarias</h3>
+
+    <button id="cuadrado" onclick="cuadrado()">x<sup>2</sup></button>
+    <button id="modulo" onclick="mod()">mod</button>
+    <button id="factorial" onclick="fact()">n!</button>
+
+  <h3>Operaciones binarias</h3>
+
+    <button id="suma" onclick="add()">+</button>
+    <button id="multiplicacion" onclick="mult()">*</button>
+    <button id="igual" onclick="eq()">=</button>
+
+  <h3>Operaciones en formato CSV</h3>
+
+    <button id="sumatorio" onclick="sumatorio()">Σ x</button>
+    <button id="ordenar" onclick="ordenar()">ordenar</button>
+    <button id="revertir" onclick="revertir()">revertir</button>
+    <button id="quitar" onclick="quitar()">quitar</button>
+ </body>
+</html>
